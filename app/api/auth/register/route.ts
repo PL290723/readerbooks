@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/prisma"
+import { ensureTablesExist } from "@/lib/ensure-tables"
 
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
+    // Asegurar que las tablas existan
+    await ensureTablesExist()
+    
     // Debug DATABASE_URL
     console.log('🔍 DATABASE_URL check:', process.env.DATABASE_URL?.substring(0, 30) + '...')
     
