@@ -6,6 +6,9 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
+    // Debug DATABASE_URL
+    console.log('🔍 DATABASE_URL check:', process.env.DATABASE_URL?.substring(0, 30) + '...')
+    
     const { email, password, name } = await request.json()
 
     if (!email || !password) {
